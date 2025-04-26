@@ -2,17 +2,17 @@
 
 using System.Reflection;
 
-public abstract class EnumerationOptimized<T> where T : EnumerationOptimized<T>
+public abstract class EnumerationDefault<T> where T : EnumerationDefault<T>
 {
     public string Value { get; }
-    public static IReadOnlyList<T> AllValues { get; } = GetAllValues();
+    public static IReadOnlyList<T> AllValues => GetAllValues();
 
-    protected EnumerationOptimized()
+    protected EnumerationDefault()
     {
         // For EF
     }
 
-    protected EnumerationOptimized(string value)
+    protected EnumerationDefault(string value)
     {
         Value = value;
     }
@@ -46,7 +46,7 @@ public abstract class EnumerationOptimized<T> where T : EnumerationOptimized<T>
     
     public override string ToString() => Value;
     
-    public static bool operator == (EnumerationOptimized<T> a, EnumerationOptimized<T> b)
+    public static bool operator == (EnumerationDefault<T> a, EnumerationDefault<T> b)
     {
         if (a is null || b is null)
         {
@@ -56,7 +56,7 @@ public abstract class EnumerationOptimized<T> where T : EnumerationOptimized<T>
         return a.Value.Equals(b.Value);
     }
 
-    public static bool operator != (EnumerationOptimized<T> a, EnumerationOptimized<T> b)
+    public static bool operator != (EnumerationDefault<T> a, EnumerationDefault<T> b)
     {
         return !(a == b);
     }
